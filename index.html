@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100..900&display=swap" rel="stylesheet">
+    <title>نیرجان</title>
+    <style>
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    background-color: black;
+
+}
+
+h1 {
+    color: green;
+    font-size: 55px;
+    font-family: "Noto Kufi Arabic", serif;
+    text-align: center; /* Ensures text inside is centered */
+}
+</style>
+</head>
+<body>
+
+    <h1 id="result">Loading...</h1>
+
+    <script>
+        // API URL
+        const apiUrl = "https://brsapi.ir/FreeTsetmcBourseApi/Api_Free_Gold_Currency.json";
+
+        // Function to fetch the USD price and calculate the result
+        async function fetchAndCalculate() {
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                // Find USD price
+                const usd = data.currency.find(item => item.name === "دلار");
+
+                if (usd) {
+                    const result = usd.price * 545;
+                    const resultString = result.toString()
+                    const million = resultString.slice(0, 2)
+                    const thousands = resultString.slice(2, 5)
+                    document.getElementById("result").textContent = `\‌‏${million} میلیون و ${thousands} هزار تومان`;
+                } else {
+                    document.getElementById("result").textContent = "USD price not found.";
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                document.getElementById("result").textContent = "Error fetching data.";
+            }
+        }
+
+        // Call function on page load
+        fetchAndCalculate();
+    </script>
+
+</body>
+</html>
+
+
