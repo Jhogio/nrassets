@@ -43,9 +43,15 @@
     <link rel="manifest" href="FavIcon/manifest.json">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100..900&display=swap" rel="stylesheet">
+    
     <title>نیرجان</title>
     <style>
+    @font-face {
+      font-family: 'IranYekan';
+      src: url('https://raw.githubusercontent.com/tripasect/nrassets/main/iranyekan-fanum-regular.ttf') format('truetype');
+    }
+    
+    
 html, body {
     height: 100%;
     margin: 0;
@@ -59,14 +65,14 @@ html, body {
 h1 {
     color: green;
     font-size: 55px;
-    font-family: "Noto Kufi Arabic", serif;
+    font-family: "IranYekan", "Noto Kufi Arabic", serif;
     text-align: center; /* Ensures text inside is centered */
 }
 </style>
 </head>
 <body>
 
-    <h1 id="result">Loading...</h1>
+    <h1 id="result">درحال بارگذاری...‌‏</h1>
 
     <script>
         // API URL
@@ -80,9 +86,12 @@ h1 {
 
                 // Find USD price
                 const usd = data.currency.find(item => item.name === "دلار");
+                
+                // Find BTC price
+                const btc = data.cryptocurrency.find(item => item.name === "بیت کوین");
 
                 if (usd) {
-                    const result = usd.price * 545;
+                    const result = btc.price * 0.005194 * usd.price;
                     const resultString = result.toString()
                     const million = resultString.slice(0, 2)
                     const thousands = resultString.slice(2, 5)
