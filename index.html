@@ -93,8 +93,8 @@ h1 {
                 if (usd) {
                     const result = btc.price * 0.005194 * usd.price;
                     const resultString = result.toString()
-                    const million = resultString.slice(0, 2)
-                    const thousands = resultString.slice(2, 5)
+                    const million = resultString.slice(0, 2).replace(/^0+/, '');
+                    const thousands = resultString.slice(2, 5).replace(/^0+/, '');
                     document.getElementById("result").textContent = `\‌‏${million} میلیون و ${thousands} هزار تومان`;
                 } else {
                     document.getElementById("result").textContent = "USD price not found.";
