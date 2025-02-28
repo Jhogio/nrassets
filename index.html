@@ -372,14 +372,11 @@
       }
     }
 
-    // Manual refresh
-    refreshButton.addEventListener("click", fetchAndCalculate);
-
     // Initial load
     fetchAndCalculate();
 
     // Refresh data every 60 seconds
-    setInterval(fetchAndCalculate, 60000);
+    setInterval(fetchAndCalculate, 20000);
   </script>
 </body>
 </html>
