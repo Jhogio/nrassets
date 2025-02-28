@@ -54,11 +54,6 @@
       transition: all var(--transition-speed);
     }
 
-    .container:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px var(--shadow-color);
-    }
-
     .value-display {
       text-align: center;
       padding: 1.5rem;
@@ -192,6 +187,7 @@
       width: 24px;
       height: 24px;
       margin-left: 8px;
+      fill: #59C561;
     }
 
     .message {
@@ -254,17 +250,6 @@
 </head>
 <body>
   <div class="container">
-    <div class="header">
-      <h1 class="title">گزارش دارایی</h1>
-      <button id="refresh-btn" class="refresh-button">
-        <svg class="refresh-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M23 4v6h-6M1 20v-6h6"></path>
-          <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"></path>
-        </svg>
-        بروزرسانی
-      </button>
-    </div>
-    
     <div class="value-display">
       <div id="result" class="main-value">
         <div class="loading"></div>
@@ -273,7 +258,6 @@
         <!-- Dynamic content will be inserted here -->
       </div>
     </div>
-    
     <div id="last-updated" class="last-updated">
       آخرین بروزرسانی: در حال بارگیری...
     </div>
@@ -315,14 +299,14 @@
         const usd = data.currency.find(item => item.name === "دلار");
         const btc = data.cryptocurrency.find(item => item.name === "بیت کوین");
 
-        if (!usd || !btc) {
+        if (!usd) {
           throw new Error("داده‌های مورد نیاز یافت نشد");
         }
 
-        usd.price += 700;
+        usd.price += 500;
 
         // Calculate the main result
-        const calculatedValue = Math.round(usd.price * 496.81 - 0.1);
+        const calculatedValue = Math.round(usd.price * 495);
         const resultFormatted = calculatedValue.toLocaleString();
 
         // Convert digits to Persian
@@ -337,15 +321,7 @@
 
         // Update stats grid
         statsElement.innerHTML = `
-          <div class="stat-card">
-            <div class="stat-label">
-              <svg class="currency-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00c853" stroke-width="2">
-                <rect x="2" y="3" width="20" height="18" rx="2" ry="2"></rect>
-                <line x1="12" y1="8" x2="12" y2="16"></line>
-                <path d="M8 12h8"></path>
-              </svg>
-              پیام
-            </div>
+          <div class="stat-card" style="grid-column: 1/-1">
             <div class="stat-value message">
               نیر جان!
               <br>
@@ -355,7 +331,7 @@
           </div>
           <div class="stat-card">
             <div class="stat-label">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 25.9047 25.5325">
+<svg class="currency-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 25.9047 25.5325">
  <g>
   <rect height="25.5325" opacity="0" width="25.9047" x="0" y="0"/>
   <path d="M25.5297 12.7584C25.5297 19.7959 19.8087 25.5169 12.7584 25.5169C5.72093 25.5169 0 19.7959 0 12.7584C0 5.72093 5.72093 0 12.7584 0C19.8087 0 25.5297 5.72093 25.5297 12.7584ZM12.325 5.93281L12.325 6.99812C10.3512 7.15031 8.66187 8.28531 8.66187 10.2178C8.66187 12.1866 10.2559 12.9419 11.9016 13.3197L12.325 13.4175L12.325 16.7944C11.36 16.7119 10.7047 16.3294 10.3109 15.4206C10.0953 14.9734 9.84562 14.7606 9.41999 14.7606C8.92218 14.7606 8.53343 15.07 8.53343 15.5934C8.53343 15.765 8.57312 15.9181 8.63968 16.0997C9.1225 17.5241 10.6953 18.2428 12.325 18.3537L12.325 19.4234C12.325 19.6466 12.5197 19.8512 12.7556 19.8512C13.0044 19.8512 13.1991 19.6466 13.1991 19.4234L13.1991 18.3509C15.2541 18.2259 17.0187 17.2103 17.0187 15.0659C17.0187 13.0787 15.4672 12.3372 13.6681 11.9353L13.1991 11.8191L13.1991 8.5603C14.0778 8.66124 14.7003 9.13061 15.0072 9.93405C15.19 10.37 15.4894 10.5956 15.9278 10.5956C16.3391 10.5956 16.7975 10.3487 16.7975 9.80656C16.7975 8.23687 14.9706 7.16437 13.1991 7.00093L13.1991 5.93281C13.1991 5.70968 13.0044 5.50499 12.7556 5.50499C12.5197 5.50499 12.325 5.70968 12.325 5.93281ZM13.2884 13.6278C14.2891 13.8737 15.1734 14.2334 15.1734 15.2231C15.1734 16.3069 14.2534 16.7191 13.1991 16.8072L13.1991 13.6094ZM12.325 11.6272L12.2428 11.6059C11.2197 11.3459 10.51 10.9166 10.51 10.0591C10.51 9.16749 11.3503 8.68124 12.325 8.55749Z"/>
@@ -367,7 +343,7 @@
           </div>
           <div class="stat-card">
             <div class="stat-label">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 25.9047 25.5325">
+<svg class="currency-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 25.9047 25.5325">
  <g>
   <rect height="25.5325" opacity="0" width="25.9047" x="0" y="0"/>
   <path d="M25.5297 12.7584C25.5297 19.7959 19.8087 25.5169 12.7584 25.5169C5.72093 25.5169 0 19.7959 0 12.7584C0 5.72093 5.72093 0 12.7584 0C19.8087 0 25.5297 5.72093 25.5297 12.7584ZM12.8575 5.91749L12.8575 7.13749L11.6531 7.13749L11.6531 5.91749C11.6531 5.65874 11.4741 5.47687 11.2253 5.47687C10.9509 5.47687 10.7819 5.65874 10.7819 5.91749L10.7819 7.13749L10.0797 7.13749C9.37594 7.13749 8.94156 7.58593 8.94156 8.28686L8.94156 17.2516C8.94156 17.9425 9.37594 18.4037 10.0797 18.4037L10.7819 18.4037L10.7819 19.6153C10.7819 19.8741 10.9509 20.0431 11.2253 20.0431C11.4741 20.0431 11.6531 19.8741 11.6531 19.6153L11.6531 18.4037L12.8575 18.4037L12.8575 19.6153C12.8575 19.8741 13.0494 20.0431 13.2853 20.0431C13.5597 20.0431 13.7416 19.8741 13.7416 19.6153L13.7416 18.3909C15.8416 18.2628 17.3141 17.1962 17.3141 15.2006C17.3141 13.7134 16.2534 12.6253 14.6694 12.4503L14.6694 12.3878C15.925 12.1959 16.7656 11.0834 16.7656 9.94874C16.7656 8.24625 15.4256 7.30406 13.7416 7.16312L13.7416 5.91749C13.7416 5.65874 13.5597 5.47687 13.2853 5.47687C13.0494 5.47687 12.8575 5.65874 12.8575 5.91749ZM15.3369 15.0831C15.3369 16.3966 14.3031 16.8641 12.9841 16.8641L10.8847 16.8641L10.8847 13.3106L12.8716 13.3106C14.2306 13.3106 15.3369 13.7369 15.3369 15.0831ZM14.8109 10.2137C14.8109 11.4662 13.7687 11.8741 12.5191 11.8741L10.8847 11.8741L10.8847 8.64874L12.8478 8.64874C13.9706 8.64874 14.8109 9.11905 14.8109 10.2137Z"/>
