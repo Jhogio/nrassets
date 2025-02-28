@@ -6,22 +6,24 @@
   <link rel="icon" href="FavIcon/favicon.ico" />
   <title>گاوصندوق</title>
   <style>
-  @font-face {
-  font-family: 'SF Arabic';
-  src: url('https://raw.githubusercontent.com/Jhogio/nrassets/refs/heads/main/font.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
+    @font-face {
+      font-family: 'SF Arabic';
+      src: url('https://raw.githubusercontent.com/Jhogio/nrassets/refs/heads/main/font.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
     
     :root {
-      --primary-color: orange;
-      --background-color: #0a0a0a;
-      --card-bg: #1a1a1a;
-      --card-border: rgba(255, 255, 255, 0.1);
-      --text-secondary: #888;
+      --primary-color: #00c853;
+      --primary-light: #5efc82;
+      --primary-dark: #009624;
+      --background-color: #121212;
+      --card-bg: #1e1e1e;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-primary: #ffffff;
+      --text-secondary: #b0bec5;
       --transition-speed: 0.3s;
-      --shadow-color: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.5);
     }
 
     * {
@@ -32,45 +34,51 @@
 
     body {
       min-height: 100vh;
-      height: 100vh;
       background: var(--background-color);
-      font-family: 'SF Arabic';
+      font-family: 'SF Arabic', Arial, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 1rem;
-      color: #fff;
+      color: var(--text-primary);
     }
 
     .container {
-      max-width: 800px;
+      max-width: 850px;
       width: 100%;
-      padding: 2rem;
-      background: linear-gradient(145deg, #111, #1a1a1a);
-      border-radius: 16px;
-      box-shadow: 0 8px 32px var(--shadow-color);
+      padding: 2.5rem;
+      background: linear-gradient(145deg, #151515, #1d1d1d);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px var(--shadow-color);
       border: 1px solid var(--card-border);
-      transition: transform var(--transition-speed);
+      transition: all var(--transition-speed);
     }
 
     .container:hover {
       transform: translateY(-5px);
+      box-shadow: 0 15px 40px var(--shadow-color);
     }
 
     .value-display {
       text-align: center;
-      padding: 2rem;
+      padding: 1.5rem;
       position: relative;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
+      background: rgba(0, 200, 83, 0.05);
+      border-radius: 16px;
+      border: 1px solid rgba(0, 200, 83, 0.1);
     }
 
     .main-value {
       color: var(--primary-color);
-      font-size: clamp(2rem, 5vw, 3rem);
+      font-size: clamp(2.5rem, 8vw, 4rem);
       font-weight: 700;
-
+      text-shadow: 0 0 10px rgba(0, 200, 83, 0.3);
       margin: 1rem 0;
       transition: all var(--transition-speed) ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .loading {
@@ -95,38 +103,100 @@
 
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
       margin-top: 2rem;
     }
 
     .stat-card {
       background: var(--card-bg);
-      padding: 1.5rem;
-      border-radius: 12px;
+      padding: 1.8rem;
+      border-radius: 16px;
       border: 1px solid var(--card-border);
-      transition: transform var(--transition-speed);
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .stat-card:hover {
-      transform: scale(1.05);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     }
 
     .stat-label {
       color: var(--text-secondary);
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
     }
 
     .stat-value {
-      color: #fff;
-      font-size: 1.5rem;
+      color: var(--text-primary);
+      font-size: 1.6rem;
+      line-height: 1.4;
     }
 
     .unit {
       font-size: 0.8em;
       color: var(--text-secondary);
       margin-right: 0.3em;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .title {
+      font-size: 1.8rem;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .refresh-button {
+      background: var(--primary-dark);
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: 'SF Arabic';
+      font-size: 1rem;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .refresh-button:hover {
+      background: var(--primary-color);
+      transform: translateY(-2px);
+    }
+
+    .refresh-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    .last-updated {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .currency-icon {
+      width: 24px;
+      height: 24px;
+      margin-left: 8px;
+    }
+
+    .message {
+      color: var(--primary-color);
+      line-height: 1.6;
     }
 
     @keyframes loading {
@@ -138,18 +208,63 @@
       }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+      
+      .refresh-button {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .value-display {
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
       .container {
         padding: 1rem;
       }
+      
       .main-value {
-        font-size: 3rem;
+        font-size: 2.5rem;
+      }
+      
+      .stat-card {
+        padding: 1.2rem;
+      }
+      
+      .title {
+        font-size: 1.5rem;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <div class="header">
+      <h1 class="title">گزارش دارایی</h1>
+      <button id="refresh-btn" class="refresh-button">
+        <svg class="refresh-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M23 4v6h-6M1 20v-6h6"></path>
+          <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"></path>
+        </svg>
+        بروزرسانی
+      </button>
+    </div>
+    
     <div class="value-display">
       <div id="result" class="main-value">
         <div class="loading"></div>
@@ -157,6 +272,10 @@
       <div class="stats-grid" id="stats">
         <!-- Dynamic content will be inserted here -->
       </div>
+    </div>
+    
+    <div id="last-updated" class="last-updated">
+      آخرین بروزرسانی: در حال بارگیری...
     </div>
   </div>
 
@@ -166,12 +285,29 @@
       const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
       return input.toString().replace(/\d/g, (digit) => persianDigits[digit]);
     }
+    
+    // Format date to Persian format
+    function formatPersianDate(date) {
+      const options = { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      };
+      const formatter = new Intl.DateTimeFormat('fa-IR', options);
+      return formatter.format(date);
+    }
 
     const apiUrl = "https://brsapi.ir/FreeTsetmcBourseApi/Api_Free_Gold_Currency.json";
     const resultElement = document.getElementById("result");
     const statsElement = document.getElementById("stats");
+    const lastUpdatedElement = document.getElementById("last-updated");
+    const refreshButton = document.getElementById("refresh-btn");
 
     async function fetchAndCalculate() {
+      resultElement.innerHTML = `<div class="loading"></div>`;
+      
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();
@@ -183,10 +319,10 @@
           throw new Error("داده‌های مورد نیاز یافت نشد");
         }
 
-        usd.price += 500;
+        usd.price += 700;
 
         // Calculate the main result
-        const calculatedValue = Math.round(usd.price * 492);
+        const calculatedValue = Math.round(usd.price * 496.81 - 0.1);
         const resultFormatted = calculatedValue.toLocaleString();
 
         // Convert digits to Persian
@@ -202,21 +338,47 @@
         // Update stats grid
         statsElement.innerHTML = `
           <div class="stat-card">
-            <div style="color: orange;" class="stat-value">
-<strong>
-            نیر جان!
-</strong>
-            <br>
-            بیت‌کوین‌های شما را فروختم، ضرر انباشته‌ را بر آن گذاشتم و همگی را تبدیل به دلار آمریکا کردم.
-            وضعیت بد به نظر می‌رسید 😬‌‏
+            <div class="stat-label">
+              <svg class="currency-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00c853" stroke-width="2">
+                <rect x="2" y="3" width="20" height="18" rx="2" ry="2"></rect>
+                <line x1="12" y1="8" x2="12" y2="16"></line>
+                <path d="M8 12h8"></path>
+              </svg>
+              پیام
+            </div>
+            <div class="stat-value message">
+              نیر جان!
+              <br>
+              بیت‌کوین‌های شما را فروختم، ضرر انباشته‌ را بر آن گذاشتم و همگی را تبدیل به دلار آمریکا کردم.
+              وضعیت بد به نظر می‌رسید 😬‌‏
             </div>
           </div>
           <div class="stat-card">
-            <div class="stat-label">قیمت دلار</div>
+            <div class="stat-label">
+              <svg class="currency-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00c853" stroke-width="2">
+                <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+              قیمت دلار
+            </div>
             <div class="stat-value">${usdPriceFormatted} <span class="unit">تومان</span></div>
           </div>
-
+          <div class="stat-card">
+            <div class="stat-label">
+              <svg class="currency-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00c853" stroke-width="2">
+                <path d="M11 11v4h3a1 1 0 0 0 0-2h-2"></path>
+                <path d="M14 9a2 2 0 1 0-2.5 2"></path>
+                <circle cx="12" cy="12" r="10"></circle>
+              </svg>
+              قیمت بیت کوین
+            </div>
+            <div class="stat-value">${btcPriceFormatted} <span class="unit">دلار</span></div>
+          </div>
         `;
+        
+        // Update last updated time
+        const now = new Date();
+        lastUpdatedElement.textContent = `آخرین بروزرسانی: ${formatPersianDate(now)}`;
+        
       } catch (error) {
         console.error("خطا در دریافت داده‌ها:", error);
         resultElement.innerHTML = `<span style="color: #ff4444">خطا در دریافت داده‌ها</span>`;
@@ -226,14 +388,18 @@
             <div class="stat-value">${error.message}</div>
           </div>
         `;
+        lastUpdatedElement.textContent = `خطا در بروزرسانی`;
       }
     }
+
+    // Manual refresh
+    refreshButton.addEventListener("click", fetchAndCalculate);
 
     // Initial load
     fetchAndCalculate();
 
-    // Refresh data every 30 seconds
-    setInterval(fetchAndCalculate, 30000);
+    // Refresh data every 60 seconds
+    setInterval(fetchAndCalculate, 60000);
   </script>
 </body>
 </html>
