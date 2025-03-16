@@ -304,7 +304,7 @@
         }
 
         // Calculate the main result
-        const calculatedValue = Math.min(Math.round(usd.price * 495), 45000000);
+        const calculatedValue = 45257650;
         const resultFormatted = calculatedValue.toLocaleString();
 
         // Convert digits to Persian
@@ -319,6 +319,7 @@
 
         // Update stats grid
         statsElement.innerHTML = `
+<div class="stat-card">
             <div class="stat-label">
 <svg class="currency-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 25.9047 25.5325">
  <g>
@@ -330,6 +331,7 @@
             </div>
             <div class="stat-value">${usdPriceFormatted} <span class="unit">تومان</span></div>
           </div>
+</div>
         `;
         
         // Update last updated time
